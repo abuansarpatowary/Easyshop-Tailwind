@@ -1,0 +1,77 @@
+<header class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <span class="text-2xl font-bold text-blue-600">⚡{{ shop.name }}</span>
+        </div>
+        <nav class="flex items-center space-x-6">
+            {% for link in linklists.main-menu.links %}
+                {% if link.links != blank %}
+                    <div class="relative group">
+                        <a class="text-gray-600 hover:text-blue-600 flex items-center py-4">
+                                    Solutions
+                            <svg class="ml-2 w-5 h-5 text-gray-600 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 hidden group-hover:flex bg-white shadow-lg mt-2 w-screen max-w-4xl py-8 px-16 z-10">
+                            <div class="container mx-auto grid grid-cols-3 gap-10">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-900">Resources</h4>
+                                    <p class="text-sm text-gray-500 mt-2">Aliquet mauris nibh cursus quis nibh mi, odio. Molestie erat.</p>
+                                    <a href="#" class="text-blue-600 hover:underline mt-2 block">Learn more</a>
+                                </div>
+                                <div>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-center">
+                                            <span class="text-xl">🔥</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Use cases</a>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-xl">📖</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Blog</a>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-xl">❤️</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Testimonials</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-center">
+                                            <span class="text-xl">🤘</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Features</a>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-xl">😎</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Team</a>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-xl">💰</span>
+                                            <a href="#" class="ml-3 text-gray-700 hover:text-blue-600">Plans</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                {% else %}
+                    <a href="{{ link.url }}" class="text-gray-600 hover:text-blue-600 py-4">{{ link.title }}</a>
+                {% endif %}
+            {% endfor %}
+        </nav>
+        <div class="flex space-x-4 ">
+            <!-- Cart -->
+            <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
+                {%- render 'cart-icon' -%}
+                <span>Cart</span>
+            </a>
+
+            <!-- Login -->
+            <a href="#" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
+                {% render 'profile-icon' %}
+                <span>Login</span>
+            </a>
+        </div>
+    </div>
+</header>
