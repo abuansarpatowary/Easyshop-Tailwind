@@ -1,25 +1,39 @@
 <header class="bg-white shadow-md">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
         <div class="flex items-center">
             <span class="text-2xl font-bold text-blue-600">⚡{{ shop.name }}</span>
         </div>
-        <nav class="flex items-center space-x-6">
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="lg:hidden flex items-center">
+            <button id="mobile-menu-button" class="focus:outline-none">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Main Menu for Desktop -->
+        <nav id="main-menu" class="hidden lg:flex items-center space-x-6">
             {% for link in linklists.main-menu.links %}
                 {% if link.links != blank %}
                     <div class="relative group">
                         <a class="text-gray-600 hover:text-blue-600 flex items-center py-4">
-                                    Solutions
+                            Solutions
                             <svg class="ml-2 w-5 h-5 text-gray-600 group-hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </a>
                         <div class="absolute left-1/2 transform -translate-x-1/2 hidden group-hover:flex group-hover:block bg-white shadow-lg w-screen max-w-4xl py-8 px-16 z-10">
                             <div class="container mx-auto grid grid-cols-3 gap-10">
+                                <!-- Mega Menu Content -->
                                 <div>
                                     <h4 class="text-lg font-semibold text-gray-900">Resources</h4>
                                     <p class="text-sm text-gray-500 mt-2">Aliquet mauris nibh cursus quis nibh mi, odio. Molestie erat.</p>
                                     <a href="#" class="text-blue-600 hover:underline mt-2 block">Learn more</a>
                                 </div>
+                                <!-- Columns for items -->
                                 <div>
                                     <ul class="space-y-3">
                                         <li class="flex items-center">
@@ -54,19 +68,20 @@
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 {% else %}
                     <a href="{{ link.url }}" class="text-gray-600 hover:text-blue-600 py-4">{{ link.title }}</a>
                 {% endif %}
             {% endfor %}
         </nav>
-        <div class="flex space-x-4 ">
+
+        <!-- Cart, Login for Desktop -->
+        <div class="hidden lg:flex space-x-4">
             <!-- Cart -->
             <a href="{{ routes.cart_url }}" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
                 {%- render 'cart-icon' -%}
                 <span>Cart</span>
             </a>
-
             <!-- Login -->
             <a href="{{ routes.account_url }}" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
                 {% render 'profile-icon' %}
@@ -74,4 +89,31 @@
             </a>
         </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md p-4">
+        <div class="flex flex-col space-y-2">
+            {% for link in linklists.main-menu.links %}
+                <a href="{{ link.url }}" class="text-gray-600 hover:text-blue-600">{{ link.title }}</a>
+            {% endfor %}
+            <!-- Cart, Login for Mobile -->
+            <a href="{{ routes.cart_url }}" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
+                {%- render 'cart-icon' -%}
+                <span>Cart</span>
+            </a>
+            <a href="{{ routes.account_url }}" class="flex items-center text-gray-600 hover:text-blue-600 space-x-2">
+                {% render 'profile-icon' %}
+                <span>Login</span>
+            </a>
+        </div>
+    </div>
 </header>
+
+{% javascript %}
+     const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+{% endjavascript %}
